@@ -1,0 +1,53 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables / secrets
+
+.env
+.env.*
+!.env.example
+
+# IDE / Editor
+.vscode/
+.idea/
+
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# CodeRAG generated repositories
+data/repositories/
+
+# Generated indexes
+data/indexes/
+
+
+# Generated evaluation results
+data/evaluation/results/
+tests/ragas_results/
+
+# Temporary evaluation files
+q001_q002.json
+
+# Unused package skeleton
+src/coderag/
+
+
+# Logs / temporary files
+*.log
+*.tmp
+*.temp
+
+
+# Jupyter
+.ipynb_checkpoints/

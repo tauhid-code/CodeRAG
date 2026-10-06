@@ -1,0 +1,1320 @@
+[
+  {
+    "id": "Q001",
+    "category": "preprocessing",
+    "question": "What is the purpose of the preprocessing module?",
+    "reference_answer": "It provides text cleaning and normalization utilities for resume and job-description text before extraction.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "resume and job-description text",
+      "cleaning/normalization",
+      "before extraction"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q002",
+    "category": "preprocessing",
+    "question": "Which words are explicitly preserved when stopwords are removed?",
+    "reference_answer": "The module preserves the words 'not', 'no', 'c', and 'r' by excluding them from the stopword set.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "not",
+      "no",
+      "c",
+      "r"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q003",
+    "category": "preprocessing",
+    "question": "How does get_stopwords() differ from load_stopwords()?",
+    "reference_answer": "load_stopwords() loads the English stopword list, while get_stopwords() removes the explicitly preserved words from that list.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "load_stopwords loads list",
+      "get_stopwords excludes _KEEP_WORDS"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q004",
+    "category": "preprocessing",
+    "question": "What happens if the NLTK stopwords corpus is missing?",
+    "reference_answer": "The loader attempts to download the stopwords corpus quietly and then retries loading it.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "detects missing corpus",
+      "quiet download",
+      "retry load"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q005",
+    "category": "preprocessing",
+    "question": "What happens if NLTK cannot be imported?",
+    "reference_answer": "The module logs a warning and returns an empty stopword set.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "warning",
+      "empty set"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q006",
+    "category": "preprocessing",
+    "question": "Why is stopword loading lazy in this module?",
+    "reference_answer": "The stopword corpus is loaded only when needed through the helper, rather than at module import time.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "on-demand loading",
+      "not eagerly loaded"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q007",
+    "category": "preprocessing",
+    "question": "What does to_lowercase() do?",
+    "reference_answer": "It returns the input text converted to lowercase using the string lower() method.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "lowercase",
+      "str.lower"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q008",
+    "category": "preprocessing",
+    "question": "What is the high-level order of operations in preprocess_text()?",
+    "reference_answer": "It lowercases the text, removes special characters, optionally removes stopwords, and normalizes whitespace.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "lowercase",
+      "special-character removal",
+      "optional stopword removal",
+      "whitespace normalization"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q009",
+    "category": "preprocessing",
+    "question": "What does the remove_stops argument control?",
+    "reference_answer": "It determines whether preprocess_text() applies stopword removal; when false, that step is skipped.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "controls stopword step",
+      "false skips removal"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q010",
+    "category": "preprocessing",
+    "question": "What does remove_stopwords() do when stop_words is omitted?",
+    "reference_answer": "It obtains the default stopword set through get_stopwords() and uses it to filter the text.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "default stopword set",
+      "get_stopwords"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q011",
+    "category": "preprocessing",
+    "question": "How does remove_stopwords() split and rebuild text?",
+    "reference_answer": "It splits the text on whitespace, filters out tokens matching stopwords, and joins the remaining tokens with spaces.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "split whitespace",
+      "filter stopwords",
+      "join with spaces"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q012",
+    "category": "preprocessing",
+    "question": "What does normalize_whitespace() return?",
+    "reference_answer": "It collapses repeated whitespace and strips leading and trailing whitespace.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "collapse repeated whitespace",
+      "strip ends"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q013",
+    "category": "preprocessing",
+    "question": "How does tokenize() form tokens?",
+    "reference_answer": "It splits the text on whitespace and retains tokens whose length is greater than one.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "whitespace split",
+      "length greater than one"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q014",
+    "category": "preprocessing",
+    "question": "Does tokenize() retain one-character tokens?",
+    "reference_answer": "No. It filters out tokens with a length of one or less.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "one-character tokens removed"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q015",
+    "category": "preprocessing",
+    "question": "Does preprocess_text() always remove stopwords?",
+    "reference_answer": "No. Stopword removal is optional and is controlled by remove_stops, which defaults to true.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "optional",
+      "default true"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q016",
+    "category": "preprocessing",
+    "question": "What logging facility does the preprocessing module use?",
+    "reference_answer": "It creates a module-level logger with logging.getLogger(__name__).",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "logging.getLogger",
+      "__name__"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q017",
+    "category": "preprocessing",
+    "question": "What is the purpose of _KEEP_WORDS?",
+    "reference_answer": "It lists words that should remain in the text instead of being removed as English stopwords.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "preserve selected words",
+      "stopword exclusion"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q018",
+    "category": "preprocessing",
+    "question": "What input transformation happens before stopword removal in preprocess_text()?",
+    "reference_answer": "The text is lowercased and passed through special-character removal before stopword removal.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "lowercase first",
+      "special-character removal before stopwords"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q019",
+    "category": "preprocessing",
+    "question": "What does the preprocessing module provide besides preprocess_text()?",
+    "reference_answer": "It provides helpers for loading stopwords, lowercasing, removing special characters, removing stopwords, normalizing whitespace, and tokenizing.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "helper functions named"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q020",
+    "category": "preprocessing",
+    "question": "Why might preserving 'not' and 'no' matter for resume/JD text?",
+    "reference_answer": "The code explicitly preserves them, so negation-related wording is not discarded by its stopword-removal step.",
+    "source_files": [
+      "src/preprocessing.py"
+    ],
+    "expected_points": [
+      "negation words preserved",
+      "effect limited to stopword removal"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q021",
+    "category": "interview_coach",
+    "question": "What is the role of interview_coach.py?",
+    "reference_answer": "It generates structured AI interview-preparation content using the Groq chat-completions API.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "interview preparation generation",
+      "Groq chat completions"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q022",
+    "category": "interview_coach",
+    "question": "Which environment variable supplies the Groq API key?",
+    "reference_answer": "GROQ_API_KEY.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "GROQ_API_KEY"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q023",
+    "category": "interview_coach",
+    "question": "Which model name is used as the default in the code?",
+    "reference_answer": "The default model is llama-3.1-8b-instant, unless overridden by the environment configuration.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "llama-3.1-8b-instant",
+      "environment-configurable"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q024",
+    "category": "interview_coach",
+    "question": "Which library client is used to call the model?",
+    "reference_answer": "The code uses the Groq client and its chat.completions.create method.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "Groq client",
+      "chat.completions.create"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q025",
+    "category": "interview_coach",
+    "question": "What does build_prompt() accept?",
+    "reference_answer": "It accepts role, matched skills, missing skills, projects, and ATS score.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "role",
+      "matched_skills",
+      "missing_skills",
+      "projects",
+      "ats_score"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q026",
+    "category": "interview_coach",
+    "question": "What role is used when no role is supplied to build_prompt()?",
+    "reference_answer": "Software Engineer.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "Software Engineer"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q027",
+    "category": "interview_coach",
+    "question": "How is a numeric ATS score represented in the prompt?",
+    "reference_answer": "It is formatted as an integer followed by '/100'; if unavailable, the prompt uses N/A.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "integer formatting",
+      "/100",
+      "N/A fallback"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q028",
+    "category": "interview_coach",
+    "question": "What kinds of interview content does the prompt request?",
+    "reference_answer": "It requests technical questions with answers, gap questions with answers, project questions without answers, and behavioral questions without answers.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "technical with answers",
+      "gap with answers",
+      "project without answers",
+      "behavioral without answers"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q029",
+    "category": "interview_coach",
+    "question": "How many technical questions does the prompt request?",
+    "reference_answer": "Five to six technical questions, described as medium to hard.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "5–6",
+      "medium/hard"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q030",
+    "category": "interview_coach",
+    "question": "How many gap questions does the prompt request?",
+    "reference_answer": "Four to five gap questions, described as easy to medium.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "4–5",
+      "easy/medium"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q031",
+    "category": "interview_coach",
+    "question": "How many project questions does the prompt request?",
+    "reference_answer": "Four project questions, with no answers requested.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "4",
+      "no answers"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q032",
+    "category": "interview_coach",
+    "question": "How many behavioral questions does the prompt request?",
+    "reference_answer": "Three behavioral questions, with no answers requested.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "3",
+      "no answers"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q033",
+    "category": "interview_coach",
+    "question": "What output format does the prompt require?",
+    "reference_answer": "A JSON-only response with the requested structured sections.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "JSON only",
+      "structured sections"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q034",
+    "category": "interview_coach",
+    "question": "What does extract_projects_from_text() try first?",
+    "reference_answer": "It searches the resume text for a Projects section and extracts short title-like lines from it.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "Projects section",
+      "title-like lines"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q035",
+    "category": "interview_coach",
+    "question": "What fallback does project extraction use if no project titles are found?",
+    "reference_answer": "It searches for lines mentioning project-like terms such as project, system, app, tool, or platform.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "fallback regex",
+      "project/system/app/tool/platform"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q036",
+    "category": "interview_coach",
+    "question": "What final fallback project label can be returned?",
+    "reference_answer": "Primary project from resume.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "Primary project from resume"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q037",
+    "category": "interview_coach",
+    "question": "What is the purpose of _clean_json()?",
+    "reference_answer": "It strips whitespace and Markdown code fences from the model response before JSON parsing.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "strip whitespace",
+      "remove Markdown fences"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q038",
+    "category": "interview_coach",
+    "question": "What temperature is used for the Groq generation request?",
+    "reference_answer": "0.65.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "temperature 0.65"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q039",
+    "category": "interview_coach",
+    "question": "What max_tokens value is used?",
+    "reference_answer": "2048.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "max_tokens 2048"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q040",
+    "category": "interview_coach",
+    "question": "What top_p value is used?",
+    "reference_answer": "0.90.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "top_p 0.90"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q041",
+    "category": "interview_coach",
+    "question": "What timeout value appears in generate_interview_questions()?",
+    "reference_answer": "The function signature has timeout=60, although the provided code does not use that parameter in the API call.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "default 60",
+      "parameter appears unused"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q042",
+    "category": "interview_coach",
+    "question": "How does the function handle an invalid or unauthorized Groq API key?",
+    "reference_answer": "It detects a 401/invalid-key condition and raises an error with a key-related message.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "401/invalid key detection",
+      "error raised"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q043",
+    "category": "interview_coach",
+    "question": "How does the function handle rate limiting?",
+    "reference_answer": "It detects a 429/rate-limit condition and raises a rate-limit-related error.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "429 detection",
+      "rate-limit error"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q044",
+    "category": "interview_coach",
+    "question": "What happens if the model response is not directly valid JSON?",
+    "reference_answer": "The code attempts a fallback extraction of a JSON object before parsing; the pasted source's fallback regex is formatting-corrupted, so its exact behavior cannot be confirmed from the supplied text.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "fallback extraction attempted",
+      "exact regex behavior uncertain"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q045",
+    "category": "interview_coach",
+    "question": "Which top-level keys are ensured in the returned result?",
+    "reference_answer": "The function ensures technical_questions, gap_questions, project_questions, and behavioral_questions are present using setdefault.",
+    "source_files": [
+      "src/interview_coach.py"
+    ],
+    "expected_points": [
+      "technical_questions",
+      "gap_questions",
+      "project_questions",
+      "behavioral_questions"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q046",
+    "category": "frontend",
+    "question": "What is the purpose of frontend/app.py?",
+    "reference_answer": "It is the Streamlit entry point that routes unauthenticated users to login and authenticated users to the home page.",
+    "source_files": [
+      "frontend/app.py"
+    ],
+    "expected_points": [
+      "Streamlit entry point",
+      "auth-based routing"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q047",
+    "category": "frontend",
+    "question": "Which session-state key determines whether app.py redirects to the home page?",
+    "reference_answer": "jwt_token.",
+    "source_files": [
+      "frontend/app.py"
+    ],
+    "expected_points": [
+      "jwt_token"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q048",
+    "category": "frontend",
+    "question": "What happens when jwt_token is truthy in app.py?",
+    "reference_answer": "The app switches to pages/home.py and then stops the current script.",
+    "source_files": [
+      "frontend/app.py"
+    ],
+    "expected_points": [
+      "switch_page pages/home.py",
+      "st.stop"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q049",
+    "category": "frontend",
+    "question": "What does app.py do when no JWT token is present?",
+    "reference_answer": "It loads and executes frontend/login.py using compile() and exec().",
+    "source_files": [
+      "frontend/app.py"
+    ],
+    "expected_points": [
+      "login.py",
+      "compile and exec"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q050",
+    "category": "frontend",
+    "question": "Which session-state values are initialized by app.py?",
+    "reference_answer": "auth_mode, jwt_token, user_name, user_email, and active_page.",
+    "source_files": [
+      "frontend/app.py"
+    ],
+    "expected_points": [
+      "auth_mode",
+      "jwt_token",
+      "user_name",
+      "user_email",
+      "active_page"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q051",
+    "category": "frontend",
+    "question": "What is the default active page in app.py?",
+    "reference_answer": "dashboard.",
+    "source_files": [
+      "frontend/app.py"
+    ],
+    "expected_points": [
+      "dashboard"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q052",
+    "category": "frontend",
+    "question": "What does render_sidebar() return?",
+    "reference_answer": "It returns the key of the currently active page.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "active page key"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q053",
+    "category": "frontend",
+    "question": "Which page keys are defined in the sidebar navigation?",
+    "reference_answer": "dashboard, analysis, and interview_coach.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "dashboard",
+      "analysis",
+      "interview_coach"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q054",
+    "category": "frontend",
+    "question": "What happens if the sidebar's active_page value is invalid?",
+    "reference_answer": "The sidebar resets active_page to dashboard.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "invalid key",
+      "reset dashboard"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q055",
+    "category": "frontend",
+    "question": "How does the sidebar visually distinguish the active navigation item?",
+    "reference_answer": "It uses a primary button style for the active item and secondary styling for inactive items.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "primary active",
+      "secondary inactive"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q056",
+    "category": "frontend",
+    "question": "What happens when a navigation button is clicked?",
+    "reference_answer": "The selected key is stored in session state and Streamlit reruns the app.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "set active_page",
+      "st.rerun"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q057",
+    "category": "frontend",
+    "question": "Which account controls are displayed in the sidebar?",
+    "reference_answer": "Settings and Support Center buttons are displayed.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "Settings",
+      "Support Center"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q058",
+    "category": "frontend",
+    "question": "What account status label is shown in the sidebar?",
+    "reference_answer": "Premium Active, with the subtitle Full access enabled.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "Premium Active",
+      "Full access enabled"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q059",
+    "category": "frontend",
+    "question": "How does the sidebar determine the displayed user's initial?",
+    "reference_answer": "It uses the uppercase first character of user_name, or U if the name is empty.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "first character",
+      "uppercase",
+      "U fallback"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q060",
+    "category": "frontend",
+    "question": "Which session-state keys are cleared when Log Out is clicked?",
+    "reference_answer": "jwt_token, user_name, user_email are set to None; stored_resumes, analysis_history, selected_resume, interview_result, and active_page are removed.",
+    "source_files": [
+      "frontend/app.py"
+    ],
+    "expected_points": [
+      "auth values set None",
+      "user data popped"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q061",
+    "category": "frontend",
+    "question": "Where does the sidebar send the user after logout?",
+    "reference_answer": "It switches to app.py.",
+    "source_files": [
+      "frontend/components/sidebar.py"
+    ],
+    "expected_points": [
+      "st.switch_page app.py"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q062",
+    "category": "frontend",
+    "question": "What does _get_resume_dir() do in home.py?",
+    "reference_answer": "It sanitizes the logged-in user's email and uses it to construct a per-user directory under uploads/resumes.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "sanitize email",
+      "uploads/resumes"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q063",
+    "category": "frontend",
+    "question": "How are stored resumes loaded on the home page?",
+    "reference_answer": "The app scans the user's resume directory for PDFs, orders them by modification time descending, and records metadata in session state.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "PDF files",
+      "mtime descending",
+      "metadata"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q064",
+    "category": "frontend",
+    "question": "What information is stored for each loaded resume?",
+    "reference_answer": "The resume name, path, date, and size.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "name",
+      "path",
+      "date",
+      "size"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q065",
+    "category": "frontend",
+    "question": "What does _save_resume_to_disk() do?",
+    "reference_answer": "It writes the uploaded file to the per-user resume directory and updates the stored-resume entry in session state.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "save upload",
+      "per-user folder",
+      "update session state"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q066",
+    "category": "frontend",
+    "question": "What does _delete_resume() do?",
+    "reference_answer": "It deletes the selected resume file, clears the selection if it matches, and removes the corresponding session-state entry.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "delete file",
+      "clear matching selection",
+      "remove state entry"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q068",
+    "category": "frontend",
+    "question": "What information is included in an analysis-history entry?",
+    "reference_answer": "Resume name, a job-description preview, scores, matched and missing skills, and a timestamp.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "resume name",
+      "JD preview",
+      "scores",
+      "matched/missing skills",
+      "timestamp"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q069",
+    "category": "frontend",
+    "question": "What are the main actions available from the home page?",
+    "reference_answer": "The dashboard provides saved-resume visibility, upload, quick analysis, and navigation to analysis and interview-coach pages.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "saved resumes",
+      "upload",
+      "quick analyze",
+      "page navigation"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q070",
+    "category": "frontend",
+    "question": "What does _run_real_analysis() do at a high level?",
+    "reference_answer": "It parses a PDF resume, extracts skills, compares skills, computes an ATS score, saves the analysis to history, and displays the result.",
+    "source_files": [
+      "frontend/pages/home.py"
+    ],
+    "expected_points": [
+      "parse PDF",
+      "extract skills",
+      "compare",
+      "ATS score",
+      "history",
+      "display"
+    ],
+    "answerable": true
+  },
+  {
+    "id": "Q071",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What database engine does the backend use in production?",
+    "reference_answer": "The available source files do not establish which database engine the backend uses.",
+    "source_files": [],
+    "expected_points": [
+      "No backend database source available"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q072",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which ORM models are defined in backend/models.py?",
+    "reference_answer": "The backend/models.py source is unavailable, so its ORM models cannot be verified.",
+    "source_files": [],
+    "expected_points": [
+      "models.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q073",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What tables are created by the backend database initialization code?",
+    "reference_answer": "The backend database initialization source is unavailable; the table definitions cannot be verified.",
+    "source_files": [],
+    "expected_points": [
+      "database.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q074",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which API routes are registered in backend/main.py?",
+    "reference_answer": "The backend/main.py source is unavailable, so its registered routes cannot be listed reliably.",
+    "source_files": [],
+    "expected_points": [
+      "main.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q075",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What HTTP method is used by the resume-analysis endpoint?",
+    "reference_answer": "The available source files do not show the backend endpoint definition or its HTTP method.",
+    "source_files": [],
+    "expected_points": [
+      "backend routes unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q076",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "How does the backend verify JWT signatures?",
+    "reference_answer": "The backend authentication and security source files are unavailable, so the signature-verification implementation cannot be confirmed.",
+    "source_files": [],
+    "expected_points": [
+      "auth/security source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q077",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which JWT signing algorithm is configured by the backend?",
+    "reference_answer": "The backend JWT configuration is not present in the available source files.",
+    "source_files": [],
+    "expected_points": [
+      "auth/security source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q078",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "How long do backend access tokens remain valid?",
+    "reference_answer": "The token-expiration configuration is not available in the supplied source files.",
+    "source_files": [],
+    "expected_points": [
+      "auth source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q079",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Where are backend user passwords hashed?",
+    "reference_answer": "The backend password-handling source is unavailable, so the hashing implementation cannot be identified.",
+    "source_files": [],
+    "expected_points": [
+      "auth/security source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q080",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which password-hashing algorithm does the backend use?",
+    "reference_answer": "The available source files do not identify the backend password-hashing algorithm.",
+    "source_files": [],
+    "expected_points": [
+      "security.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q081",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "How does the backend prevent duplicate user registration?",
+    "reference_answer": "The backend registration and database source code is unavailable, so duplicate-registration behavior cannot be verified.",
+    "source_files": [],
+    "expected_points": [
+      "auth/database source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q082",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What fields are required by the backend registration request schema?",
+    "reference_answer": "The backend request-model source is unavailable, so required registration fields cannot be confirmed.",
+    "source_files": [],
+    "expected_points": [
+      "models.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q083",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What fields are returned by the backend login response?",
+    "reference_answer": "The backend login response implementation is unavailable in the supplied source files.",
+    "source_files": [],
+    "expected_points": [
+      "auth/main/models source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q084",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which CORS origins are allowed by the backend?",
+    "reference_answer": "The backend CORS configuration is not available in the supplied source files.",
+    "source_files": [],
+    "expected_points": [
+      "main.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q085",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Does the backend store uploaded resumes in local disk or object storage?",
+    "reference_answer": "The backend storage implementation is unavailable, so its resume-storage destination cannot be verified.",
+    "source_files": [],
+    "expected_points": [
+      "backend source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q086",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What is the maximum resume upload size enforced by the backend?",
+    "reference_answer": "No available source file establishes a backend upload-size limit.",
+    "source_files": [],
+    "expected_points": [
+      "backend source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q087",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which PDF parsing library is used by the resume parser module?",
+    "reference_answer": "The parser source file is unavailable, so the exact PDF parsing library cannot be confirmed from the provided source set.",
+    "source_files": [],
+    "expected_points": [
+      "parser.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q088",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "How does the ATS scorer calculate its final score?",
+    "reference_answer": "The scorer source file is unavailable, so the exact ATS scoring formula cannot be verified.",
+    "source_files": [],
+    "expected_points": [
+      "scorer.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q089",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What weighting is assigned to skills versus experience in the ATS score?",
+    "reference_answer": "The available source files do not show the scorer's weighting formula.",
+    "source_files": [],
+    "expected_points": [
+      "scorer.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q090",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which skills taxonomy is used by the skills extractor?",
+    "reference_answer": "The skills-extractor source file is unavailable, so its taxonomy cannot be identified.",
+    "source_files": [],
+    "expected_points": [
+      "skills_extractor.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q091",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "How does the application extract text from scanned image-only PDFs?",
+    "reference_answer": "The available source files do not establish whether OCR is implemented or which OCR method is used.",
+    "source_files": [],
+    "expected_points": [
+      "parser source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q092",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What database connection pool size is configured?",
+    "reference_answer": "The backend database configuration is unavailable, so the connection-pool size cannot be determined.",
+    "source_files": [],
+    "expected_points": [
+      "database.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q093",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Does the backend use SQLAlchemy or another ORM?",
+    "reference_answer": "The backend dependency and model source files are unavailable, so the ORM choice cannot be verified.",
+    "source_files": [],
+    "expected_points": [
+      "database/models source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q094",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What exception handler does the backend use for invalid JWTs?",
+    "reference_answer": "The backend authentication and route source code is unavailable, so the exact exception handling cannot be described.",
+    "source_files": [],
+    "expected_points": [
+      "auth/dependencies/main unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q095",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which endpoint deletes a saved resume?",
+    "reference_answer": "The backend route definitions are unavailable, so the resume-deletion endpoint cannot be identified.",
+    "source_files": [],
+    "expected_points": [
+      "main.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q096",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Does the backend enforce per-user authorization on resume downloads?",
+    "reference_answer": "The supplied source files do not include the backend authorization and download routes needed to verify this.",
+    "source_files": [],
+    "expected_points": [
+      "dependencies/main unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q097",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What environment variable configures the backend database URL?",
+    "reference_answer": "The available source files do not reveal the backend database URL environment-variable name.",
+    "source_files": [],
+    "expected_points": [
+      "database.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q098",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "Which framework is used to implement the backend API?",
+    "reference_answer": "The backend entry-point source is unavailable, so the framework cannot be confirmed from the available files.",
+    "source_files": [],
+    "expected_points": [
+      "main.py source unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q099",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What is implemented in frontend/login.py?",
+    "reference_answer": "frontend/login.py is referenced by app.py but is absent from the available Python source-file listing, so its implementation cannot be verified.",
+    "source_files": [],
+    "expected_points": [
+      "login.py unavailable"
+    ],
+    "answerable": false
+  },
+  {
+    "id": "Q100",
+    "category": "unanswerable_backend_or_missing_source",
+    "question": "What automated tests cover the backend authentication flow?",
+    "reference_answer": "No backend test source files are included in the available source listing, so authentication test coverage cannot be established.",
+    "source_files": [],
+    "expected_points": [
+      "backend tests unavailable"
+    ],
+    "answerable": false
+  }
+]
