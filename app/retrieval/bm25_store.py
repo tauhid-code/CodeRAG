@@ -1,4 +1,3 @@
-
 import re
 from typing import Iterable
 
@@ -17,7 +16,8 @@ class BM25Store:
     def tokenize(text: str) -> list[str]:
         """Tokenize natural language and Python identifiers."""
         identifiers = re.findall(
-            r"[A-Za-z_][A-Za-z0-9_]*|\d+", text
+            r"[A-Za-z_][A-Za-z0-9_]*|\d+",
+            text,
         )
 
         tokens = []
@@ -40,7 +40,8 @@ class BM25Store:
 
             # Split snake_case and other separators.
             parts = re.split(
-                r"[_\W]+", split_identifier.lower()
+                r"[_\W]+",
+                split_identifier.lower(),
             )
 
             for part in parts:
@@ -50,9 +51,21 @@ class BM25Store:
         return tokens
 
     def add_chunks(self, chunks: Iterable[CodeChunk]) -> None:
-        """Add code chunks and build the BM25 index."""
+        """Build the BM25 index from the supplied chunks."""
+        self.chunks = []
+        self.tokenized_corpus = []
+        self.bm25 = None
+
         for chunk in chunks:
-            tokens = self.tokenize(chunk.content)
+            # Include code and symbol metadata in lexical retrieval.
+            searchable_text = (
+                f"{chunk.file_path} "
+                f"{chunk.symbol_name} "
+                f"{chunk.symbol_type} "
+                f"{chunk.content}"
+            )
+
+            tokens = self.tokenize(searchable_text)
 
             if not tokens:
                 continue
@@ -64,10 +77,15 @@ class BM25Store:
             self.bm25 = BM25Okapi(self.tokenized_corpus)
 
     def search(
-        self, query: str, top_k: int = 5
+        self,
+        query: str,
+        top_k: int = 5,
     ) -> list[tuple[CodeChunk, float]]:
-        """Return the most relevant chunks and their BM25 scores."""
-        if top_k <= 0 or self.bm25 is None:
+        """Return the most relevant chunks and BM25 scores."""
+        if top_k <= 0:
+            raise ValueError("top_k must be greater than zero")
+
+        if not query or not query.strip() or self.bm25 is None:
             return []
 
         query_tokens = self.tokenize(query)
@@ -79,8 +97,7 @@ class BM25Store:
 
         ranked_indices = sorted(
             range(len(scores)),
-            key=lambda i: scores[i],
-            reverse=True,
+            key=lambda index: (-float(scores[index]), index),
         )
 
         results = []
@@ -88,13 +105,12 @@ class BM25Store:
         for index in ranked_indices:
             score = float(scores[index])
 
-            # Ignore chunks with no positive keyword relevance.
             if score <= 0:
                 continue
 
             results.append((self.chunks[index], score))
 
-            if len(results) == top_k:
+            if len(results) >= top_k:
                 break
 
         return results

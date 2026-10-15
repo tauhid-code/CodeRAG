@@ -35,22 +35,28 @@ class HybridRetriever:
 
     @staticmethod
     def _get_chunk(result: Any) -> CodeChunk:
-        """Extract a CodeChunk from a retrieval result."""
+        """Extract and validate a CodeChunk from a retrieval result."""
+        chunk = None
+
         if isinstance(result, CodeChunk):
-            return result
+            chunk = result
 
-        if isinstance(result, tuple):
-            return result[0]
+        elif isinstance(result, tuple) and len(result) > 0:
+            chunk = result[0]
 
-        if isinstance(result, dict):
-            return result["chunk"]
+        elif isinstance(result, dict):
+            chunk = result.get("chunk")
 
-        if hasattr(result, "chunk"):
-            return result.chunk
+        elif hasattr(result, "chunk"):
+            chunk = result.chunk
 
-        raise TypeError(
-            f"Unsupported retrieval result: {type(result)}"
-        )
+        if not isinstance(chunk, CodeChunk):
+            raise TypeError(
+                "Retrieval result must contain a CodeChunk. "
+                f"Received: {type(result).__name__}"
+            )
+
+        return chunk
 
     @staticmethod
     def _chunk_key(chunk: CodeChunk) -> tuple:
